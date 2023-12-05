@@ -12,29 +12,40 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
-      splash: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'images/splash.png',
-            width: 200,
+    return Stack(
+      children: [
+        Image.asset(
+          'images/splash_bg.jpg', // Replace with your background image path
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
+        AnimatedSplashScreen(
+          splash: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'images/splash.png',
+                width: 200,
+              ),
+              const Text(
+                'Jayanti Beach Explorer',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
-          const Text(
-            'Jayanti Beach Explorer',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-      splashIconSize: 400,
-      splashTransition: SplashTransition.fadeTransition,
-      duration: 2000,
-      backgroundColor: Color.fromARGB(255, 2, 133, 255),
-      nextScreen: const WelcomeScreen(),
+          splashIconSize: 800,
+          splashTransition: SplashTransition.fadeTransition,
+          duration: 2000,
+          backgroundColor:
+              Colors.transparent, // Set background color to transparent
+          nextScreen: const WelcomeScreen(),
+        ),
+      ],
     );
   }
 }

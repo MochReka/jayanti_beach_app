@@ -1,16 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:jayanti_beach_app/Screens/tiket_screen.dart';
+import 'package:jayanti_beach_app/Screens/hotel_screen.dart';
+import 'package:jayanti_beach_app/Screens/resto_screen.dart';
+import 'package:jayanti_beach_app/Screens/foto_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
+  Widget _buildBlueBox({
+    required String imagePath,
+    required String label,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 75,
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                imagePath,
+                width: 20,
+                height: 20,
+              ),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
-    // Calculate spacing based on the number of blue boxes
     double spacing = (screenWidth - 75 * 4) / 5;
 
-    // Data for each blue box
     List<BoxData> boxDataList = [
       BoxData(label: 'Tiket', imagePath: 'assets/images/ticket.png'),
       BoxData(label: 'Spot Foto', imagePath: 'assets/images/spot.png'),
@@ -23,10 +61,9 @@ class DashboardScreen extends StatelessWidget {
         children: [
           Container(
             width: screenWidth,
-            height: 300, // Adjust this height as needed
+            height: 300,
             child: Stack(
               children: [
-                // Background Image
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.asset(
@@ -36,8 +73,6 @@ class DashboardScreen extends StatelessWidget {
                     height: 300,
                   ),
                 ),
-
-                // Overlay Container
                 Positioned(
                   top: 250,
                   left: 0,
@@ -53,8 +88,6 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // Greeting Text
                 Positioned(
                   top: 60,
                   left: 20,
@@ -67,8 +100,6 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // Blue Boxes
                 for (int i = 0; i < boxDataList.length; i++)
                   Positioned(
                     top: 170,
@@ -76,30 +107,58 @@ class DashboardScreen extends StatelessWidget {
                     child: _buildBlueBox(
                       imagePath: boxDataList[i].imagePath,
                       label: boxDataList[i].label,
+                      onTap: () {
+                        switch (boxDataList[i].label) {
+                          case 'Hotel':
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HotelScreen()),
+                            );
+                            break;
+                          case 'Spot Foto':
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FotoScreen()),
+                            );
+                            break;
+                          case 'Restoran':
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RestoScreen()),
+                            );
+                            break;
+                          case 'Tiket':
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TiketScreen()),
+                            );
+                            break;
+                        }
+                      },
                     ),
                   ),
               ],
             ),
           ),
-
-          // Other widgets below
           Positioned(
-                  top: 60,
-                  left: 40,
-                  child: const Text(
-                    '     Trending Spot',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black ,
-                    ),
-                  ),
-                ),
-
+            top: 60,
+            left: 40,
+            child: const Text(
+              '     Trending Spot \n',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ),
           Container(
             child: Stack(
               children: [
-                // Rounded Image
                 Center(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
@@ -114,38 +173,21 @@ class DashboardScreen extends StatelessWidget {
               ],
             ),
           ),
-          
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBlueBox({required String imagePath, required String label}) {
-    return Container(
-      width: 75,
-      height: 100,
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              imagePath,
-              width: 20,
-              height: 20,
-            ),
-            Text(
-              label,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 10,
+          Container(
+            child: Positioned(
+              top: 60,
+              left: 100,
+              child: const Text(
+                'RP. 5000/1 orang \n',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
