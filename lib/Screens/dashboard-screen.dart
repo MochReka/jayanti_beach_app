@@ -1,11 +1,44 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:jayanti_beach_app/Screens/tiket_screen.dart';
 import 'package:jayanti_beach_app/Screens/hotel_screen.dart';
 import 'package:jayanti_beach_app/Screens/resto_screen.dart';
 import 'package:jayanti_beach_app/Screens/foto_screen.dart';
+import 'package:jayanti_beach_app/constants.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
+
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  late PageController _pageController;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentPage);
+
+    // Auto slide every 3 seconds
+    Timer.periodic(Duration(seconds: 3), (Timer timer) {
+      if (_currentPage < 2) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          _currentPage,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
 
   Widget _buildBlueBox({
     required String imagePath,
@@ -18,7 +51,7 @@ class DashboardScreen extends StatelessWidget {
         width: 75,
         height: 100,
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: primaryColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(
@@ -44,6 +77,36 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildTrendingBox(String imageUrl) {
+    return Container(
+      width: 250, // Tentukan lebar tetap
+      height: 150, // Tentukan tinggi tetap
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          imageUrl,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTrendingText(String text) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Text(
+          '$text',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -54,6 +117,24 @@ class DashboardScreen extends StatelessWidget {
       BoxData(label: 'Spot Foto', imagePath: 'assets/images/spot.png'),
       BoxData(label: 'Hotel', imagePath: 'assets/images/hotel.png'),
       BoxData(label: 'Restoran', imagePath: 'assets/images/restoran.png'),
+    ];
+
+    List<String> trendingSpotImages = [
+      'assets/images/slide1.jpg',
+      'assets/images/slide2.jpg',
+      'assets/images/slide3.jpg',
+    ];
+
+    List<String> trendingRestoImages = [
+      'assets/images/slide4.jpg',
+      'assets/images/slide5.jpg',
+      'assets/images/slide6.jpg',
+    ];
+
+    List<String> trendingHotelImages = [
+      'assets/images/slide7.jpg',
+      'assets/images/slide8.jpg',
+      'assets/images/slide9.jpg',
     ];
 
     return Scaffold(
@@ -94,7 +175,7 @@ class DashboardScreen extends StatelessWidget {
                   child: const Text(
                     'Selamat Pagi!',
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -113,28 +194,32 @@ class DashboardScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HotelScreen()),
+                                builder: (context) => HotelScreen(),
+                              ),
                             );
                             break;
                           case 'Spot Foto':
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => FotoScreen()),
+                                builder: (context) => FotoScreen(),
+                              ),
                             );
                             break;
                           case 'Restoran':
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RestoScreen()),
+                                builder: (context) => RestoScreen(),
+                              ),
                             );
                             break;
                           case 'Tiket':
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => TiketScreen()),
+                                builder: (context) => TiketScreen(),
+                              ),
                             );
                             break;
                         }
@@ -144,52 +229,71 @@ class DashboardScreen extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            top: 60,
-            left: 40,
-            child: const Text(
-              '     Trending Spot \n',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+          _buildTrendingText('  Trending Spot'),
+
+          // Trending Spot
+          Container(
+            height: 150,
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentPage = index;
+                });
+              },
+              itemCount: trendingSpotImages.length,
+              itemBuilder: (context, index) {
+                return _buildTrendingBox(trendingSpotImages[index]);
+              },
             ),
           ),
+
+          _buildTrendingText('  Trending Resto'),
+
+          // Trending Resto
           Container(
-            child: Stack(
-              children: [
-                Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      'https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY4MTM2MDQ2MA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
-                      fit: BoxFit.cover,
-                      width: 350,
-                      height: 180,
-                    ),
-                  ),
-                ),
-              ],
+            height: 150,
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentPage = index;
+                });
+              },
+              itemCount: trendingRestoImages.length,
+              itemBuilder: (context, index) {
+                return _buildTrendingBox(trendingRestoImages[index]);
+              },
             ),
           ),
+
+          _buildTrendingText('  Trending Hotel'),
+
+          // Trending Hotel
           Container(
-            child: Positioned(
-              top: 60,
-              left: 100,
-              child: const Text(
-                'RP. 5000/1 orang \n',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
+            height: 150,
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentPage = index;
+                });
+              },
+              itemCount: trendingHotelImages.length,
+              itemBuilder: (context, index) {
+                return _buildTrendingBox(trendingHotelImages[index]);
+              },
             ),
-          )
+          ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 }
 

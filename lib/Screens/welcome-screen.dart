@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jayanti_beach_app/Screens/dashboard-screen.dart';
+import 'package:jayanti_beach_app/constants.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class WelcomeScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: primaryColor,
                             ),
                           ),
                         ),
