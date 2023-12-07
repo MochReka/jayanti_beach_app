@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jayanti_beach_app/Screens/splash-screen.dart';
+import 'package:jayanti_beach_app/Screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
