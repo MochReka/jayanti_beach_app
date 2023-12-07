@@ -5,7 +5,7 @@ import 'package:jayanti_beach_app/models/hotels.dart';
 var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
 
 class DetailScreen extends StatelessWidget {
-  final TourismPlace place;
+  final Hotels place;
 
   const DetailScreen({Key? key, required this.place}) : super(key: key);
 

@@ -82,9 +82,9 @@ class WelcomeScreen extends StatelessWidget {
                             primary: Color.fromARGB(255, 54, 184, 207),
                             onPrimary: Colors.white,
                             padding: EdgeInsets.symmetric(
-                                horizontal: 120, vertical: 15),
+                                horizontal: 100, vertical: 15),
                           ),
-                          child: Text('Start'),
+                          child: Text('Mulai'),
                         ),
                       ],
                     ),
