@@ -1,10 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:jayanti_beach_app/Screens/tiket_screen.dart';
-import 'package:jayanti_beach_app/Screens/hotel_screen.dart';
-import 'package:jayanti_beach_app/Screens/resto_screen.dart';
-import 'package:jayanti_beach_app/Screens/foto_screen.dart';
+import 'package:jayanti_beach_app/Screens/ticket_page.dart';
+import 'package:jayanti_beach_app/Screens/hotel_page.dart';
+import 'package:jayanti_beach_app/Screens/restaurants_page.dart';
+import 'package:jayanti_beach_app/Screens/photo_spots_page.dart';
+import 'package:jayanti_beach_app/Screens/location_page.dart';
 import 'package:jayanti_beach_app/constants.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -23,22 +22,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _currentPage);
-
-    // Auto slide every 3 seconds
-    Timer.periodic(Duration(seconds: 3), (Timer timer) {
-      if (_currentPage < 2) {
-        _currentPage++;
-      } else {
-        _currentPage = 0;
-      }
-      if (_pageController.hasClients) {
-        _pageController.animateToPage(
-          _currentPage,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      }
-    });
   }
 
   Widget _buildBlueBox({
@@ -111,13 +94,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double spacing = (screenWidth - 75 * 4) / 5;
+    double spacing = (screenWidth - 85 * 5 - 4 * -10) / 4; // Jumlah kotak * lebar kotak + (Jumlah kotak - 1) * jarak antar kotak
 
     List<BoxData> boxDataList = [
       BoxData(label: 'Tiket', imagePath: 'assets/images/ticket.png'),
       BoxData(label: 'Spot Foto', imagePath: 'assets/images/spot.png'),
       BoxData(label: 'Hotel', imagePath: 'assets/images/hotel.png'),
       BoxData(label: 'Restoran', imagePath: 'assets/images/restoran.png'),
+      BoxData(label: 'Lokasi', imagePath: 'assets/images/lokasi.png'),
     ];
 
     List<String> trendingSpotImages = [
@@ -195,7 +179,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MainScreen(),
+                                builder: (context) => HotelPage(),
                               ),
                             );
                             break;
@@ -203,7 +187,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => FotoScreen(),
+                                builder: (context) => PhotoSpotsPage(),
                               ),
                             );
                             break;
@@ -211,7 +195,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => RestoScreen(),
+                                builder: (context) => RestaurantsPage(),
                               ),
                             );
                             break;
@@ -219,7 +203,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TiketScreen(),
+                                builder: (context) => TicketPage(),
+                              ),
+                            );
+                            break;
+                          case 'Lokasi':
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LocationPage(),
                               ),
                             );
                             break;
@@ -310,7 +302,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             label: "Profile",
           )
         ],
-      ), 
+      ),
     );
   }
 
