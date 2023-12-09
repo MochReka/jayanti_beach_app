@@ -5,6 +5,7 @@ import 'package:jayanti_beach_app/Screens/restaurants_page.dart';
 import 'package:jayanti_beach_app/Screens/photo_spots_page.dart';
 import 'package:jayanti_beach_app/Screens/location_page.dart';
 import 'package:jayanti_beach_app/constants.dart';
+import 'package:jayanti_beach_app/Screens/profile_screen.dart';
 import 'package:ionicons/ionicons.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -94,7 +95,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double spacing = (screenWidth - 85 * 5 - 4 * -10) / 4; // Jumlah kotak * lebar kotak + (Jumlah kotak - 1) * jarak antar kotak
+    double spacing = (screenWidth - 85 * 5 - 4 * -10) /
+        4; // Jumlah kotak * lebar kotak + (Jumlah kotak - 1) * jarak antar kotak
 
     List<BoxData> boxDataList = [
       BoxData(label: 'Tiket', imagePath: 'assets/images/ticket.png'),
@@ -284,6 +286,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        backgroundColor: Colors.blueAccent,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Ionicons.home_outline),
@@ -302,6 +305,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
             label: "Profile",
           )
         ],
+        onTap: (index) {
+          // Handle navigation when a tab is tapped
+          switch (index) {
+            case 0:
+              // Navigasi ke Home
+              break;
+            case 1:
+              // Navigasi ke Bookmark screen
+              break;
+            case 2:
+              // Navigasi ke Ticket screen
+              break;
+            case 3:
+              // Navigate ke Profile screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
+              break;
+          }
+        },
       ),
     );
   }
