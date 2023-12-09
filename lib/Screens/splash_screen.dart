@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Stack(
       children: [
         Image.asset(
-          'images/splash_bg.jpg', // Replace with your background image path
+          'images/splash_bg3.jpg', // Replace with your background image path
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
