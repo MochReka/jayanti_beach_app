@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jayanti_beach_app/constants.dart';
 import 'package:jayanti_beach_app/screens/signin_screen.dart';
 import 'package:jayanti_beach_app/screens/signup_screen.dart';
 import 'package:jayanti_beach_app/theme/theme.dart';
@@ -55,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                     child: WelcomeButton(
                       buttonText: 'Sign in',
                       onTap: SignInScreen(),
-                      color: Color.fromARGB(255, 54, 184, 207),
+                      color: primaryColor,
                       textColor: Colors.white,
                     ),
                   ),

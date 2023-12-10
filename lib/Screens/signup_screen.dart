@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:jayanti_beach_app/constants.dart';
 import 'package:jayanti_beach_app/screens/signin_screen.dart';
 import 'package:jayanti_beach_app/theme/theme.dart';
 import 'package:jayanti_beach_app/widgets/custom_scaffold.dart';
@@ -49,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.w900,
-                          color: lightColorScheme.primary,
+                          color: primaryColor,
                         ),
                       ),
                       const SizedBox(
@@ -160,7 +161,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 agreePersonalData = value!;
                               });
                             },
-                            activeColor: lightColorScheme.primary,
+                            activeColor: primaryColor,
                           ),
                           const Text(
                             'I agree to the processing of ',
@@ -172,7 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             'Personal data',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: lightColorScheme.primary,
+                              color: primaryColor,
                             ),
                           ),
                         ],

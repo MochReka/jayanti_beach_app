@@ -1,45 +1,15 @@
 // screens/hotel_page.dart
 import 'package:flutter/material.dart';
+import 'package:jayanti_beach_app/constants.dart';
 import 'package:jayanti_beach_app/models/hotel_data.dart';
 
 class HotelPage extends StatelessWidget {
-  final List<Hotel> hotels = [
-    Hotel(
-      name: 'Hotel A',
-      description:
-          'Deskripsi Hotel A. Fasilitas lengkap dengan pemandangan indah.',
-      imagePath: 'assets/images/hotel1.jpg',
-      rating: 4.5,
-      location: 'Kota A',
-      price: 150.0,
-    ),
-    Hotel(
-      name: 'Hotel B',
-      description:
-          'Deskripsi Hotel B. Pengalaman menginap yang nyaman dan mewah.',
-      imagePath: 'assets/images/hotel1.jpg',
-      rating: 4.0,
-      location: 'Kota B',
-      price: 120.0,
-    ),
-    Hotel(
-      name: 'Hotel B',
-      description:
-          'Deskripsi Hotel B. Pengalaman menginap yang nyaman dan mewah.',
-      imagePath: 'assets/images/hotel1.jpg',
-      rating: 4.0,
-      location: 'Kota B',
-      price: 120.0,
-    ),
-    // Tambahkan hotel lainnya sesuai kebutuhan
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Daftar Hotel'),
-        backgroundColor: Color.fromARGB(255, 54, 184, 207),
+        backgroundColor: primaryColor,
       ),
       body: ListView.builder(
         itemCount: hotels.length,
@@ -121,7 +91,7 @@ class HotelCard extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         primary:
-                            Color.fromARGB(255, 54, 184, 207), // Sesuaikan dengan warna halaman tiket
+                            primaryColor, // Sesuaikan dengan warna halaman tiket
                         onPrimary: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jayanti_beach_app/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LocationPage extends StatelessWidget {
@@ -7,7 +8,7 @@ class LocationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Halaman Lokasi'),
-        backgroundColor: Colors.blue, // Sesuaikan dengan warna halaman tiket
+        backgroundColor: primaryColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -37,8 +38,7 @@ class LocationPage extends StatelessWidget {
                 height: 200,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(
-                        'assets/images/gambarlokasi.jpg'), // Sesuaikan dengan path gambar Anda
+                    image: AssetImage('assets/images/gambarlokasi.jpg'),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10),
@@ -50,23 +50,24 @@ class LocationPage extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
-              Text(
-                'Pantai Indah adalah destinasi liburan yang sempurna. '
-                'Nikmati keindahan pasir putih dan air laut yang jernih. '
-                'Tempat ini cocok untuk bersantai dan menikmati keindahan alam.',
-                style: TextStyle(fontSize: 16),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Pantai Indah adalah destinasi liburan yang sempurna. '
+                  'Nikmati keindahan pasir putih dan air laut yang jernih. '
+                  'Tempat ini cocok untuk bersantai dan menikmati keindahan alam.',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
               SizedBox(height: 20),
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Aksi yang diambil ketika tombol ditekan
                     _launchGoogleMaps();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:
-                        Colors.blue, // Sesuaikan dengan warna halaman tiket
+                    primary: primaryColor,
                     onPrimary: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -88,12 +89,9 @@ class LocationPage extends StatelessWidget {
     );
   }
 
-  // Method untuk membuka Google Maps
   _launchGoogleMaps() async {
-    // Ganti koordinat (-6.2088, 106.8456) sesuai dengan koordinat lokasi Anda
-    const url =
-        'https://maps.app.goo.gl/cixuYMhgd1UdXs847';
-        
+    const url = 'https://maps.app.goo.gl/cixuYMhgd1UdXs847';
+
     if (await canLaunch(url)) {
       await launch(url);
     } else {

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:jayanti_beach_app/constants.dart';
 import 'package:jayanti_beach_app/screens/signup_screen.dart';
 import 'package:jayanti_beach_app/widgets/custom_scaffold.dart';
 import 'package:jayanti_beach_app/Screens/dashboard_screen.dart';
-
-import '../theme/theme.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -50,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.w900,
-                          color: lightColorScheme.primary,
+                          color: primaryColor,
                         ),
                       ),
                       const SizedBox(
@@ -130,7 +129,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     rememberPassword = value!;
                                   });
                                 },
-                                activeColor: lightColorScheme.primary,
+                                activeColor: primaryColor,
                               ),
                               const Text(
                                 'Remember me',
@@ -145,7 +144,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               'Forget password?',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: lightColorScheme.primary,
+                                color: primaryColor,
                               ),
                             ),
                           ),
@@ -254,7 +253,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               'Sign up',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: lightColorScheme.primary,
+                                color: primaryColor,
                               ),
                             ),
                           ),

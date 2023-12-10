@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jayanti_beach_app/constants.dart';
 import 'package:jayanti_beach_app/helper/month.dart';
 
 class BookingPage extends StatelessWidget {
@@ -17,8 +18,8 @@ class BookingPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Halaman Pemesanan'),
-        backgroundColor: Color.fromARGB(255, 54, 184, 207),
+        title: Text('Pemesanan'),
+        backgroundColor: primaryColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

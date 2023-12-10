@@ -223,7 +223,7 @@ class _TicketPageState extends State<TicketPage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 54, 184, 207),
+                  primary: primaryColor,
                   onPrimary: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

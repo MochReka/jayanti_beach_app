@@ -1,45 +1,30 @@
+// restaurants_page.dart
 import 'package:flutter/material.dart';
+import 'package:jayanti_beach_app/constants.dart';
+import 'package:jayanti_beach_app/models/resto_data.dart'; // Import model data
 
 class RestaurantsPage extends StatelessWidget {
+  final List<Restaurant> restaurants =
+      getRestaurants(); // Menggunakan data dari model
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Restoran Terbaik'),
-        backgroundColor: Colors.blue, // Sesuaikan dengan warna yang diinginkan
+        title: Text('Restoran'),
+        backgroundColor: primaryColor,
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: ListView(
-          children: [
-            RestaurantCard(
-              name: 'Warung Makan Bahagia',
-              cuisine: 'Masakan Nusantara',
-              rating: 4.5,
-              imagePath: 'assets/images/resto1.jpg',
-            ),
-            SizedBox(height: 16),
-            RestaurantCard(
-              name: 'Sushi Sensation',
-              cuisine: 'Masakan Jepang',
-              rating: 4.7,
-              imagePath: 'assets/images/resto2.jpg',
-            ),
-            SizedBox(height: 16),
-            RestaurantCard(
-              name: 'Sushi Sensation',
-              cuisine: 'Masakan Jepang',
-              rating: 4.7,
-              imagePath: 'assets/images/resto3.jpg',
-            ),
-            SizedBox(height: 16),
-            RestaurantCard(
-              name: 'Sushi Sensation',
-              cuisine: 'Masakan Jepang',
-              rating: 4.7,
-              imagePath: 'assets/images/resto1.jpg',
-            ),
-          ],
+          children: restaurants.map((restaurant) {
+            return RestaurantCard(
+              name: restaurant.name,
+              cuisine: restaurant.cuisine,
+              rating: restaurant.rating,
+              imagePath: restaurant.imagePath,
+            );
+          }).toList(),
         ),
       ),
     );
